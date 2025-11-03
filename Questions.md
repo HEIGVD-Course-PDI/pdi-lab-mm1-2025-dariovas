@@ -13,6 +13,39 @@ You can answer in English or French.
 
 ### The implementation in the file `models/simpy_m_m_1.py` counts for 4 points maximum. (4p)
 
+Below, you can find the implementation of the two functions `generate_requests` and `process_request`.
+
+```py
+def generate_requests(self):
+    """Generate requests following a Poisson process."""
+    while True:
+        # ******** Add your code here ********
+        # Generates the waiting time until the next client.
+        interarrival_time = np.random.exponential(self.interarrival_time)
+        # Waits this time.
+        yield self.env.timeout(interarrival_time)
+        # Process the request.
+        yield self.env.process(self.process_request())
+
+
+def process_request(self):
+    """Place a request in the queue and process it when the server is available.
+    
+    The method also records statistics about the response time.
+    """
+    arrival_time = self.env.now
+
+    # ******** Add your code here ********
+    # Waits until the server is ready.
+    with self.server.request() as req:
+        yield req
+        # Serves the client.
+        service_duration = np.random.exponential(self.service_time)
+        yield self.env.timeout(service_duration)
+
+    departure_time = self.env.now
+    self.response_times.append(departure_time - arrival_time)
+```
 
 2-Validate the simulation model
 -------------------------------

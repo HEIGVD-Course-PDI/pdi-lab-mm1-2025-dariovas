@@ -5,6 +5,7 @@ The service time is exponentially distributed.
 """
 
 from statistics import mean
+import numpy as np
 
 # ---------------------------------------------------------------------------
 class SimpyQueue:
@@ -25,7 +26,12 @@ class SimpyQueue:
         """Generate requests following a Poisson process."""
         while True:
             # ******** Add your code here ********
-            pass
+            # Generates the waiting time until the next client.
+            interarrival_time = np.random.exponential(self.interarrival_time)
+            # Waits this time.
+            yield self.env.timeout(interarrival_time)
+            # Process the request.
+            yield self.env.process(self.process_request())
 
 
     def process_request(self):
@@ -36,6 +42,12 @@ class SimpyQueue:
         arrival_time = self.env.now
 
         # ******** Add your code here ********
+        # Waits until the server is ready.
+        with self.server.request() as req:
+            yield req
+            # Serves the client.
+            service_duration = np.random.exponential(self.service_time)
+            yield self.env.timeout(service_duration)
 
         departure_time = self.env.now
         self.response_times.append(departure_time - arrival_time)
