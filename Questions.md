@@ -52,7 +52,26 @@ def process_request(self):
 
 #### Show at least 3 different simulation results with different parameters and compare them with the analytical model. (6p)
 
-*Your answer here*
+*The parameter `p` is defined as the ratio of the arrival rate to the service rate.*
+
+*To simulate the M/M/1 queue, we consider three values of p : `0.2`, `0.6` and `0.8`. These values are chosen to show the impact on the expected response time E[T] and the expected number of clients in the system E[N]. As p increases, the system becomes more heavily loaded, so both the response time and the queue length grow. Specially with high values of p, that lead to longer delays and larger queues.*
+
+![](./images/queue_behavior_mm1.png)
+
+Below, you can find the differents results.
+
+```bash
+With p = 0.2
+
+Mean response time: 0.0201 seconds
+Mean number of clients in the system: 0.1672
+
+With p = 0.6
+
+With p = 0.8
+
+```
+
 
 3-Evaluate the impact of an load increase
 -----------------------------------------
