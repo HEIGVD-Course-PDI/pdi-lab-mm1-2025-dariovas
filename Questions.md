@@ -126,39 +126,68 @@ Mean number of clients in the system: 4.0651
 
 #### What is the value of `SERVICE_RATE` that achieves the same mean response time when doubling the `ARRIVAL_RATE` to `80/s`? What is the server utilization in that case? (2p)
 
-*When we double the ARRIVAL_RATE, the server becomes overloaded and the mean response time increases dramatically.
+*When we double the ARRIVAL_RATE, we would need to choose a SERVICE_RATE that keeps p < 1, even the M/M/1 queue will no longer be stable. To archieve the same mean response time as before, we must have the same E[T]value, which was `0.1013 sec`. The corresponding SERVICE_RATE is `E[T] = 1/(SERVICE_RATE - ARRIVAL_RATE) <-> SERVICE_RATE = 1+E[T]*ARRIVAL_RATE/E[T] = 89.8716683`, which give us approximately the same value.
+
+*The server utilization is given by `p = ARRIVAL_RATE/SERVICE_RATE`, in that case, `p = 80/89.8716683 = 0,89`. It means the server is busy 89% of the time.
 
 ```bash
-Mean response time: 1876.1881 seconds
-Mean number of clients in the system: 150165.7651
+Mean response time: 0.1005 seconds
+Mean number of clients in the system: 8.0380
 ```
-
-This occurs because p > 1, which means the M/M/1 queue is no longer stable. To archieve the same mean response time as before, we would need to choose a SERVICE_RATE that keeps p > 1.
 
 #### Use the analytical M/M/1 model to confirm your findings. (3p)
 
-*Using the analytical M/M/1 model, we know that the expected number of clients in the system E[N] is calculated using E[N] = p/(1-p) and the expected response time E[T] is calculated using E[T] = 1/(SERVICE_RATE - ARRIVAL_RATE). For an `ARRIVAL_RATE = 80/s` and `SERVICE_RATE = 50/s`, we get `p = 1.6 > 1`, E[N] = -2.66 and E[T] = -0.05. This confirms that the queue is unstable, because the mean response time and the mean number of clients in the system grow without bound.
+*Using the analytical M/M/1 model, we know that the expected response time E[T] is calculated using E[T] = 1/(SERVICE_RATE - ARRIVAL_RATE). For an `ARRIVAL_RATE = 80/s`, we get by solving the equation above the expected result. 
 
 #### Describe and interpret the results. (3p)
 
-*The negative values for E[N] and E[T] indicate that the formulas are no more valid when p > 1. This happens because the arrival rate exceeds the service rate, which means that the server cannot process clients fast enough. Thus, the queue grows indefinitely.*
+*Doubling the arrival rate from 40/s to 80/s increases the load on the server. To keep the same mean response time, the service rate must be increased so that SERVICE_RATE - ARRIVAL_RATE remains the same. In absolute terms, SERVICE_RATE must be increased by about 1/E[T] (here ≈ 9.87 /s).*
 
+*This higher utilization produces a much larger mean number of clients in the system. To handle this, the server must process packets faster.*
+
+*To conclude, we observe that we do not need to double the service rate, if the arrival rate doubles.s
 
 5-Rule of Bertsekas and Gallager
 --------------------------------
 
 #### Describe your experiments and results. (2p)
 
-*Your answer here*
+> *"A transmission line k times as fast will accommodate k times as many packets at k times smaller average delay per packet."*
+
+*We begin with ARRIVAL_RATE = `30/s` and SERVICE_RATE = `40/s`.*
+
+```bash 
+Mean response time: 0.0994 seconds
+Mean number of clients in the system: 2.9511
+```
+
+Now, we double by k=2 the ARRIVAL_RATE and the SERVICE_RATE.
+
+```bash
+Mean response time: 0.0505 seconds
+Mean number of clients in the system: 3.0431
+```
+
+We repeat the operation.
+
+```bash
+Mean response time: 0.0251 seconds
+Mean number of clients in the system: 3.0243
+```
 
 #### Provide an analytical explanation of your findings. (2p)
 
-*Your answer here*
+*The rule means if the system is k times faster, we can accept k times more load and while maintening a mean response time that is k times smaller.*
 
+*This can be explained using p = ARRIVAL_RATE/SERVICE_RATE. For example, multiplying the value of both by k will always give the same value for p, and therefore the same system utilization, but E[T] will be smaller because `1/(SERVICE_RATE-ARRIVAL_RATE)` will have a denominator that is k times larger.*
 
 Conclusion
 ----------
 
 #### Document your conclusions here. What did you learn in this lab? (2p)
 
-*Your answer here*
+*I learned how the M/M/1 queueing model behaves and how it can be used to represent real systems such as servers.*
+
+*First, I validated that the simulation results match the analytical model, showing the M/M/1 theory correctly predicts the system's performance. I observed that as p increases, both mean response time and mean number of clients in the system increase quickly, confirming the exponential growth, when the server approches full utilization.*
+
+*To conclude, I verified the Bertsekas and Gallager rule, showing that when both the arrival and service rate are multiplied by a factor k, the system can handle k times more traffic while keeping the mean response time per packet k times smaller.*

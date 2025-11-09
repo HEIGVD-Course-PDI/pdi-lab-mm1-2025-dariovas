@@ -71,8 +71,8 @@ In their book "Data Networks", Bertsekas and Gallager provide a rule of thumb fo
 
 #### Todo
 
-- [ ] Run an experiment to verify this rule of thumb.
-- [ ] Answer the questions in the file `Questions.md`.
+- [x] Run an experiment to verify this rule of thumb.
+- [x] Answer the questions in the file `Questions.md`.
 
 
 6-Plot M/M/1 performance metrics
@@ -82,14 +82,14 @@ Currently, the `main` function in `main_mm1.py` only prints the results of a sin
 
 #### Todo
 
-- [ ] Write a script `plot_mm1.py` that runs a series of simulations with increasing utilization $\rho$. Keep $\mu=50/s$ constant and increase $\lambda$ from 0 to almost $\mu$.
-- [ ] Generate two plot files: `mm1_t.png` and `mm1_n.png` that show the mean response time E[T] and the mean number of clients in the system E[N] as a function of the utilization $\rho$.
+- [x] Write a script `plot_mm1.py` that runs a series of simulations with increasing utilization $\rho$. Keep $\mu=50/s$ constant and increase $\lambda$ from 0 to almost $\mu$.
+- [x] Generate two plot files: `mm1_t.png` and `mm1_n.png` that show the mean response time E[T] and the mean number of clients in the system E[N] as a function of the utilization $\rho$.
 
 
 Checklist at the end of the lab
 -------------------------------
 
-- [ ] The simulation model `models/simpy_m_m_1.py` is completed and works correctly.
-- [ ] You have a script `plot_mm1.py` that runs a series of simulations and generates two plot files.
-- [ ] You have the two plot files `mm1_t.png` and `mm1_n.png`.
-- [ ] You have answered all the questions in the file `Questions.md`.
+- [x] The simulation model `models/simpy_m_m_1.py` is completed and works correctly.
+- [x] You have a script `plot_mm1.py` that runs a series of simulations and generates two plot files.
+- [x] You have the two plot files `mm1_t.png` and `mm1_n.png`.
+- [x] You have answered all the questions in the file `Questions.md`.
