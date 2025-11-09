@@ -31,7 +31,7 @@ class SimpyQueue:
             # Waits this time.
             yield self.env.timeout(interarrival_time)
             # Process the request.
-            yield self.env.process(self.process_request())
+            self.env.process(self.process_request())
 
 
     def process_request(self):
@@ -46,8 +46,7 @@ class SimpyQueue:
         with self.server.request() as req:
             yield req
             # Serves the client.
-            service_duration = np.random.exponential(self.service_time)
-            yield self.env.timeout(service_duration)
+            yield self.env.timeout(np.random.exponential(self.service_time))
 
         departure_time = self.env.now
         self.response_times.append(departure_time - arrival_time)
