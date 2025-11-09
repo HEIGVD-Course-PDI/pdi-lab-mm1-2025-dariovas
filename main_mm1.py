@@ -3,7 +3,7 @@ import simpy
 import models.simpy_m_m_1 as simpy_mm1
 
 # Default parameters
-ARRIVAL_RATE = 10.0  # Arrival rate (clients per second)
+ARRIVAL_RATE = 42.0  # Arrival rate (clients per second)
 SERVICE_RATE = 50.0  # Service rate (clients per second)
 SIM_DURATION = 10_000  # Duration of the simulation (seconds)
 

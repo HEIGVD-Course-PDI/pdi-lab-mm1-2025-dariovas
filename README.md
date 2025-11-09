@@ -31,7 +31,7 @@ Compare the results of the simulation with the analytical results of the M/M/1 q
 
 #### Todo
 
-- [ ] Answer the questions in the file `Questions.md`.
+- [x] Answer the questions in the file `Questions.md`.
 
 
 3-Evaluate the impact of a load increase
@@ -41,9 +41,9 @@ To develop an understanding of the behavior of the M/M/1 queueing system, we wan
 
 #### Todo
 
-- [ ] Run the simulation with `ARRIVAL_RATE = 30/s` and `SERVICE_RATE = 50/s`. Note the result.
-- [ ] Increase the `ARRIVAL_RATE` by 40% and run the simulation again. Note the result.
-- [ ] Answer the questions in the file `Questions.md`.
+- [x] Run the simulation with `ARRIVAL_RATE = 30/s` and `SERVICE_RATE = 50/s`. Note the result.
+- [x] Increase the `ARRIVAL_RATE` by 40% and run the simulation again. Note the result.
+- [x] Answer the questions in the file `Questions.md`.
 
 You should observe that a modest increase of the load can have a significant impact on the performance of the system.
 
