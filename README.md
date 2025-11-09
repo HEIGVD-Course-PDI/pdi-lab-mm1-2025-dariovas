@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/l6htz_ZV)
 Simulation of a M/M/1 queueing system with SimPy
 ========================================================================
 
@@ -30,7 +31,7 @@ Compare the results of the simulation with the analytical results of the M/M/1 q
 
 #### Todo
 
-- [ ] Answer the questions in the file `Questions.md`.
+- [x] Answer the questions in the file `Questions.md`.
 
 
 3-Evaluate the impact of a load increase
@@ -40,9 +41,9 @@ To develop an understanding of the behavior of the M/M/1 queueing system, we wan
 
 #### Todo
 
-- [ ] Run the simulation with `ARRIVAL_RATE = 30/s` and `SERVICE_RATE = 50/s`. Note the result.
-- [ ] Increase the `ARRIVAL_RATE` by 40% and run the simulation again. Note the result.
-- [ ] Answer the questions in the file `Questions.md`.
+- [x] Run the simulation with `ARRIVAL_RATE = 30/s` and `SERVICE_RATE = 50/s`. Note the result.
+- [x] Increase the `ARRIVAL_RATE` by 40% and run the simulation again. Note the result.
+- [x] Answer the questions in the file `Questions.md`.
 
 You should observe that a modest increase of the load can have a significant impact on the performance of the system.
 
@@ -55,10 +56,10 @@ One of our main questions is: if the arrival rate $\lambda$ doubles, how do we n
 
 #### Todo
 
-- [ ] Run a simulation with `ARRIVAL_RATE = 40/s` and `SERVICE_RATE = 50/s`. Note the mean response time.
-- [ ] Double the `ARRIVAL_RATE` to `80/s`. Using trial and error, find the value of `SERVICE_RATE` that achieves the same mean response time as in the first simulation.
-- [ ] Use the analytical M/M/1 model confirm your findings.
-- [ ] Answer the questions in the file `Questions.md`.
+- [x] Run a simulation with `ARRIVAL_RATE = 40/s` and `SERVICE_RATE = 50/s`. Note the mean response time.
+- [x] Double the `ARRIVAL_RATE` to `80/s`. Using trial and error, find the value of `SERVICE_RATE` that achieves the same mean response time as in the first simulation.
+- [x] Use the analytical M/M/1 model confirm your findings.
+- [x] Answer the questions in the file `Questions.md`.
 
 
 5-Rule of Bertsekas and Gallager
@@ -70,8 +71,8 @@ In their book "Data Networks", Bertsekas and Gallager provide a rule of thumb fo
 
 #### Todo
 
-- [ ] Run an experiment to verify this rule of thumb.
-- [ ] Answer the questions in the file `Questions.md`.
+- [x] Run an experiment to verify this rule of thumb.
+- [x] Answer the questions in the file `Questions.md`.
 
 
 6-Plot M/M/1 performance metrics
@@ -81,14 +82,14 @@ Currently, the `main` function in `main_mm1.py` only prints the results of a sin
 
 #### Todo
 
-- [ ] Write a script `plot_mm1.py` that runs a series of simulations with increasing utilization $\rho$. Keep $\mu=50/s$ constant and increase $\lambda$ from 0 to almost $\mu$.
-- [ ] Generate two plot files: `mm1_t.png` and `mm1_n.png` that show the mean response time E[T] and the mean number of clients in the system E[N] as a function of the utilization $\rho$.
+- [x] Write a script `plot_mm1.py` that runs a series of simulations with increasing utilization $\rho$. Keep $\mu=50/s$ constant and increase $\lambda$ from 0 to almost $\mu$.
+- [x] Generate two plot files: `mm1_t.png` and `mm1_n.png` that show the mean response time E[T] and the mean number of clients in the system E[N] as a function of the utilization $\rho$.
 
 
 Checklist at the end of the lab
 -------------------------------
 
-- [ ] The simulation model `models/simpy_m_m_1.py` is completed and works correctly.
-- [ ] You have a script `plot_mm1.py` that runs a series of simulations and generates two plot files.
-- [ ] You have the two plot files `mm1_t.png` and `mm1_n.png`.
-- [ ] You have answered all the questions in the file `Questions.md`.
+- [x] The simulation model `models/simpy_m_m_1.py` is completed and works correctly.
+- [x] You have a script `plot_mm1.py` that runs a series of simulations and generates two plot files.
+- [x] You have the two plot files `mm1_t.png` and `mm1_n.png`.
+- [x] You have answered all the questions in the file `Questions.md`.
