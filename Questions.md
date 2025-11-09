@@ -25,7 +25,7 @@ def generate_requests(self):
         # Waits this time.
         yield self.env.timeout(interarrival_time)
         # Process the request.
-        yield self.env.process(self.process_request())
+        self.env.process(self.process_request())
 
 
 def process_request(self):
@@ -40,8 +40,7 @@ def process_request(self):
     with self.server.request() as req:
         yield req
         # Serves the client.
-        service_duration = np.random.exponential(self.service_time)
-        yield self.env.timeout(service_duration)
+        yield self.env.timeout(np.random.exponential(self.service_time))
 
     departure_time = self.env.now
     self.response_times.append(departure_time - arrival_time)
@@ -58,9 +57,9 @@ def process_request(self):
 
 *Below is the analytical model, where the expected number of clients in the system E[N] is calculated using E[N] = p/(1-p) and the expected response time E[T] is calculated using E[T] = 1/(SERVICE_RATE - ARRIVAL_RATE). The values corresponding to the different chosen values of P are as follows :* 
 
-- p = `0.2` : E[N] = 0,25 and E[T] = 0,025.
-- p = `0.6` : E[N] = 1,5 and E[T] = 0,05.
-- p = `0.8` : E[N] = 4 and E[T] = 0,1.
+- p = `0.2` : E[N] = 0.25 and E[T] = 0.025.
+- p = `0.6` : E[N] = 1.5 and E[T] = 0.05.
+- p = `0.8` : E[N] = 4 and E[T] = 0.1.
 
 ![](./images/queue_behavior_mm1.png)
 
@@ -69,23 +68,21 @@ def process_request(self):
 ```bash
 With p = 0.2
 
-Mean response time: 0.0201 seconds
-Mean number of clients in the system: 0.1672
+Mean response time: 0.0251 seconds
+Mean number of clients in the system: 0.2570
 
 With p = 0.6
 
-Mean response time: 0.0200 seconds
-Mean number of clients in the system: 0.3814
+Mean response time: 0.0506 seconds
+Mean number of clients in the system: 1.5097
 
 With p = 0.8
 
-Mean response time: 0.0201 seconds
-Mean number of clients in the system: 0.4443
-
+Mean response time: 0.0992 seconds
+Mean number of clients in the system: 3.9915
 ```
 
-*To conclude, the simulated results follow the analytical model. For low load, in the case where p = `0,2`, the simulation is close to the analytical values. As the load increases, in the cases where p = `0,6` and p = `0,8`, the simulation underestimates the expected number of clients and response time compared to the analytical model. However, the simulation and the anaylitical model show the same trend, higher load leads to longer queues and higher response times.*
-
+*In conclusion, the simulation and the analytical model give the same results. We can see that as p increases, meaning the system is busier, both the response time and the number of clients in the queue increase. This confirms that the M/M/1 model accurately describes the queue.*
 
 3-Evaluate the impact of an load increase
 -----------------------------------------
@@ -95,8 +92,8 @@ Mean number of clients in the system: 0.4443
 *Below is the simulation results when running with ARRIVAL_RATE = `30/s` and SERVICE_RATE = `50/s`.*
 
 ```bash
-Mean response time: 0.0200 seconds
-Mean number of clients in the system: 0.3830
+Mean response time: 0.0499 seconds
+Mean number of clients in the system: 1.5114
 ```
 
 #### What are the simulation results when running with a 40% increased `ARRIVAL_RATE`? (2p)
@@ -104,13 +101,13 @@ Mean number of clients in the system: 0.3830
 *Below is the simulation results when running with a 40% increased ARRIVAL_RATE, which leads the value from `30` to `42`.*
 
 ```bash
-Mean response time: 0.0200 seconds
-Mean number of clients in the system: 0.4585
+Mean response time: 0.1215 seconds
+Mean number of clients in the system: 5.1218
 ```
 
 #### Interpret and explain the results. (3p)
 
-*As the arrival rate increases by 40%, the system load P increases from 0,6 to 0,84.Both the number of clients and the response time increasae significantly. This sohws that the M/M/1 queue becomes more congested under higher load, as their curves are exponential.*
+*As the arrival rate increases by 40%, the system load P increases from 0,6 to 0,84. Both the number of clients and the response time increase significantly. This shows that the M/M/1 queue becomes more congested under higher load, as their curves are exponential.*
 
 
 4-Doubling the arrival rate
@@ -118,19 +115,33 @@ Mean number of clients in the system: 0.4585
 
 #### What are the simulation results when running with `ARRIVAL_RATE = 40/s` and `SERVICE_RATE = 50/s`? What is the utilization of the server? (2p)
 
-*Your answer here*
+*Below is the simulation results when running with ARRIVAL_RATE = `40/s` and SERVICE_RATE = `50/s`.*
+
+*The server utilization is given by `p = ARRIVAL_RATE/SERVICE_RATE`, in that case, `p = 40/50 = 0,8`. It means the server is busy 80% of the time.
+
+```bash
+Mean response time: 0.1013 seconds
+Mean number of clients in the system: 4.0651
+```
 
 #### What is the value of `SERVICE_RATE` that achieves the same mean response time when doubling the `ARRIVAL_RATE` to `80/s`? What is the server utilization in that case? (2p)
 
-*Your answer here*
+*When we double the ARRIVAL_RATE, the server becomes overloaded and the mean response time increases dramatically.
+
+```bash
+Mean response time: 1876.1881 seconds
+Mean number of clients in the system: 150165.7651
+```
+
+This occurs because p > 1, which means the M/M/1 queue is no longer stable. To archieve the same mean response time as before, we would need to choose a SERVICE_RATE that keeps p > 1.
 
 #### Use the analytical M/M/1 model to confirm your findings. (3p)
 
-*Your answer here*
+*Using the analytical M/M/1 model, we know that the expected number of clients in the system E[N] is calculated using E[N] = p/(1-p) and the expected response time E[T] is calculated using E[T] = 1/(SERVICE_RATE - ARRIVAL_RATE). For an `ARRIVAL_RATE = 80/s` and `SERVICE_RATE = 50/s`, we get `p = 1.6 > 1`, E[N] = -2.66 and E[T] = -0.05. This confirms that the queue is unstable, because the mean response time and the mean number of clients in the system grow without bound.
 
 #### Describe and interpret the results. (3p)
 
-*Your answer here*
+*The negative values for E[N] and E[T] indicate that the formulas are no more valid when p > 1. This happens because the arrival rate exceeds the service rate, which means that the server cannot process clients fast enough. Thus, the queue grows indefinitely.*
 
 
 5-Rule of Bertsekas and Gallager

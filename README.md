@@ -56,10 +56,10 @@ One of our main questions is: if the arrival rate $\lambda$ doubles, how do we n
 
 #### Todo
 
-- [ ] Run a simulation with `ARRIVAL_RATE = 40/s` and `SERVICE_RATE = 50/s`. Note the mean response time.
-- [ ] Double the `ARRIVAL_RATE` to `80/s`. Using trial and error, find the value of `SERVICE_RATE` that achieves the same mean response time as in the first simulation.
-- [ ] Use the analytical M/M/1 model confirm your findings.
-- [ ] Answer the questions in the file `Questions.md`.
+- [x] Run a simulation with `ARRIVAL_RATE = 40/s` and `SERVICE_RATE = 50/s`. Note the mean response time.
+- [x] Double the `ARRIVAL_RATE` to `80/s`. Using trial and error, find the value of `SERVICE_RATE` that achieves the same mean response time as in the first simulation.
+- [x] Use the analytical M/M/1 model confirm your findings.
+- [x] Answer the questions in the file `Questions.md`.
 
 
 5-Rule of Bertsekas and Gallager
